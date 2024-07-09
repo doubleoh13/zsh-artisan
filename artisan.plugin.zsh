@@ -26,7 +26,6 @@ function artisan() {
         else
             local docker_compose_cmd=`_docker_compose_cmd`
             local docker_compose_service_name=`$=docker_compose_cmd ps --services 2>/dev/null | grep 'app\|php\|api\|workspace\|laravel\.test\|webhost' | head -n1`
-            echo docker_compose_service_name
             if [ -t 1 ]; then
                 artisan_cmd="$docker_compose_cmd exec $docker_compose_service_name php artisan"
             else
@@ -36,9 +35,19 @@ function artisan() {
         fi
     fi
 
+    local artisan_subcmd=$1
+    shift
+
+    local artisan_args=()
+    local arg
+    for arg in $@
+    do
+        artisan_args+=($(printf "%s" "$arg" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/'/"))
+    done
+
     local artisan_start_time=`date +%s`
 
-    eval $artisan_cmd $*
+    eval $artisan_cmd $artisan_subcmd $artisan_args
 
     local artisan_exit_status=$? # Store the exit status so we can return it later
 
