@@ -1,6 +1,15 @@
 <p align="center">
-    <img src="https://jessarcher.github.io/zsh-artisan/logo.svg?1" alt="zsh-artisan - Enhanced Laravel integration for zsh" width="400">
+    <img src="https://jessarcher.github.io/zsh-artisan/logo.svg?1" alt="zsh-artisan - Laravel integration for zsh" width="400">
 </p>
+
+**This is a maintained fork of [jessarcher/zsh-artisan](https://github.com/jessarcher/zsh-artisan)**.
+
+Enhancements include:
+
+- `.env` support for setting `ARTISAN_COMMAND` or `ARTISAN_SERVICE`
+- Cleaner and reusable command resolution logic
+- Improved Docker Compose detection
+- JSON-based completion parsing for better accuracy
 
 This plugin adds an `artisan` shell command with the following features:
 
@@ -30,23 +39,15 @@ This plugin adds an `artisan` shell command with the following features:
 Add the following bundle to your `.zshrc`:
 
 ```zsh
-antigen bundle jessarcher/zsh-artisan
+antigen bundle doubleoh13/zsh-artisan
 ```
 
-### [Fig](https://fig.io)
-
-Fig adds apps, shortcuts, and autocomplete to your existing terminal.
-
-Install `artisan` in just one click.
-
-<a href="https://fig.io/plugins/other/zsh-artisan_jessarcher" target="_blank"><img src="https://fig.io/badges/install-with-fig.svg" /></a>
-
-### Oh-my-zsh
+### Oh-my-zsh (Custom Plugin Directory)
 
 First download the plugin to your oh-my-zsh custom plugin location:
 
 ```zsh
-git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
+git clone https://github.com/doubleoh13/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
 ```
 
 > Note that the repository name is prefixed with `zsh-`, however the plugin
@@ -62,12 +63,20 @@ plugins=(
 )
 ```
 
+### [zinit](https://github.com/zdharma-continuum/zinit)
+
+Add the following to your `.zshrc`:
+
+```zsh
+zinit load doubleoh13/zsh-artisan
+```
+
 ### [zplug](https://github.com/zplug/zplug)
 
 Add the following to your `.zshrc`:
 
 ```zsh
-zplug "jessarcher/zsh-artisan"
+zplug "doubleoh13/zsh-artisan"
 ```
 
 ## Configuration
@@ -135,7 +144,7 @@ ARTISAN=/home/vagrant/.oh-my-zsh/custom/plugins/artisan
 if [ -d "$ARTISAN" ]; then
   echo "$ARTISAN exist"
 else
-  git clone https://github.com/jessarcher/zsh-artisan.git $ARTISAN
+  git clone https://github.com/doubleoh13/zsh-artisan.git $ARTISAN
   sed -i 's/plugins=(git)/plugins=(git composer artisan)/g' /home/vagrant/.zshrc
   source /home/vagrant/.zshrc
 fi
